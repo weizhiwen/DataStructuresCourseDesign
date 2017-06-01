@@ -260,7 +260,9 @@ void BiTree(){
 			}
 			break;
 		case 7:
-			printf("---------Huffman编码-------"); break;
+			printf("---------Huffman编码-------");
+			printf("功能未实现");
+			break;
 		case 8:break;
 		default:
 			printf("ERROR!"); break;

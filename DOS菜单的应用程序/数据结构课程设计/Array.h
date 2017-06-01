@@ -59,6 +59,7 @@ bool isNonZeroElem(TSMATRIX matrix, int row, int col, int &data)
 		if (matrix.data[i].x == row && matrix.data[i].y == col)
 		{
 			data = matrix.data[i].value;
+
 			return true;
 		}
 	}
@@ -93,11 +94,9 @@ void multiplyTSMatrix(TSMATRIX matrixA, TSMATRIX matrixB, TSMATRIX &matrixC)
 					int temp = 0; //储存乘积的值每次都清零
 					for (int k = 1; k <= colsA; k++)
 					{
-						if (isNonZeroElem(matrixA, i, k, a) == false)
-							continue;
-						if (isNonZeroElem(matrixB, k, j, b) == false)
-							continue;
-						temp += a * b;
+						//核心计算，暂时有问题
+						if (isNonZeroElem(matrixA, i, k, a) && isNonZeroElem(matrixB, k, j, b))
+							temp += a * b;
 					}
 					//判断计算的结果是否为零，不为零则压缩到矩阵C中
 					if (temp != 0)
