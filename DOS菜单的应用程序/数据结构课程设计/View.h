@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
 #include "LinkList.h"
+#include "通讯录.h"
+#include "Stack.h"
+#include "Array.h"
+#include "Binarytree.h"
 
 //主程序界面函数
 
@@ -23,7 +27,6 @@ void LinkList(){
 	//链表相关变量
 	PLIST L = NULL;
 	int num = 0;
-
 	do{
 		printf("\n");
 		printf("**************单链表的基本操作及应用***************\n");
@@ -43,7 +46,7 @@ void LinkList(){
 			{
 				printf("请输入初始化单链表的结点个数\n");
 				scanf_s("%d", &num);
-				createList(L, num);
+				L = createList(L, num);
 			}
 			break;
 		case 2:
@@ -51,7 +54,7 @@ void LinkList(){
 			{
 				int i , data;
 				i = data = 0;
-				printf("请输入要插入的位置和插入的数据");
+				printf("请输入要插入的位置和插入的数据\n");
 				scanf_s("%d%d", &i, &data);
 				insertNode(L, i, data);
 			}
@@ -61,10 +64,10 @@ void LinkList(){
 			{
 				int i, data;
 				i = data = 0;
-				printf("请输入要删除结点的位置");
+				printf("请输入要删除结点的位置\n");
 				scanf_s("%d", &i);
 				deleteNode(L, i, data);
-				printf("你删除的结点的数据值为%d", data);
+				printf("你删除的结点的数据值为%d\n", data);
 			}
 			break;
 		case 4:
@@ -72,19 +75,20 @@ void LinkList(){
 			{
 				int i, data;
 				i = data = 0;
-				printf("请输入要查找的结点的位置");
+				printf("请输入要查找的结点的位置\n");
 				scanf_s("%d", &i);
 				selectNode(L, i, data);
-				printf("你查找的结点的数据值为%d", data);
+				printf("你查找的结点的数据值为%d\n", data);
 			}
 			break;
 		case 5:
 			printf("--------显示链表-------\n"); 
 			printListNode(L);
+			printf("--------显示完毕-------\n");
 			break;
 		case 6:
 			printf("--------通讯录---------\n");
-			printf("功能暂时没有写");
+			showTellBook();
 			break;
 		case 7: break;
 		default:
@@ -96,6 +100,10 @@ void LinkList(){
 //栈菜单
 void Stack(){
 	int n;
+	//栈相关变量
+	STACK s;
+	initStack(&s);
+	int elem;
 	do{
 		printf("\n");
 		printf("****************栈的基本操作及应用*****************\n");
@@ -109,13 +117,31 @@ void Stack(){
 		scanf_s("%d", &n);
 		switch (n){
 		case 1:
-			printf("--------进栈-------"); break;
+			printf("--------进栈-------\n");
+			{
+				printf("请输入要进栈的元素值\n");
+				scanf_s("%d", &elem);
+				push(&s, elem);
+			}
+			break;
 		case 2:
-			printf("--------出栈-------"); break;
+			printf("--------出栈-------\n");
+			{
+				pop(&s, elem);
+				printf("出栈的值为%d\n", elem);
+			}
+			break;
 		case 3:
-			printf("--------取栈顶元素-------"); break;
+			printf("--------取栈顶元素-------\n");
+			{
+				getTop(&s, elem);
+				printf("栈顶元素的值为%d\n", elem);
+			}
+			break;
 		case 4:
-			printf("--------表达式求值-------"); break;
+			printf("--------表达式求值-------\n");
+			printf("功能未实现\n");
+			break;
 		case 5:break;
 		default:
 			printf("ERROR!"); break;
@@ -126,6 +152,8 @@ void Stack(){
 //数组矩阵菜单
 void Array(){
 	int n;
+	//矩阵相关变量
+	TSMATRIX matrix;
 	do{
 		printf("\n");
 		printf("*************稀疏矩阵的压缩存储及应用**************\n");
@@ -138,11 +166,27 @@ void Array(){
 		scanf_s("%d", &n);
 		switch (n){
 		case 1:
-			printf("---------创建-------"); break;
+			printf("---------创建-------\n"); 
+			createTSMATRIX(matrix);
+			break;
 		case 2:
-			printf("---------显示-------"); break;
+			printf("---------显示-------\n"); 
+			printTSMatrix(matrix);
+			break;
 		case 3:
-			printf("---------矩阵乘法-------"); break;
+			printf("---------矩阵乘法-------\n");
+			{
+				printf("计算矩阵A乘以矩阵B得矩阵C\n");
+				TSMATRIX matrixA, matrixB, matrixC;
+				printf("请输入矩阵A\n");
+				createTSMATRIX(matrixA);
+				printf("请输入矩阵B\n");
+				createTSMATRIX(matrixB);
+				multiplyTSMatrix(matrixA, matrixB, matrixC);
+				printf("计算出结果矩阵C为\n");
+				printTSMatrix(matrixC);
+			}
+			break;
 		case 4:break;
 		default:
 			printf("ERROR!"); break;
@@ -153,6 +197,8 @@ void Array(){
 //二叉树菜单
 void BiTree(){
 	int n;
+	//二叉树相关变量
+	PBITREE T;
 	do{
 		printf("\n");
 		printf("**************二叉树的基本操作及应用***************\n");
@@ -169,17 +215,50 @@ void BiTree(){
 		scanf_s("%d", &n);
 		switch (n){
 		case 1:
-			printf("---------创建二叉树--------"); break;
+			printf("---------创建二叉树--------\n");
+			{
+				printf("先根创建二叉树\n");
+				createBiTree(T);
+			}
+			break;
 		case 2:
-			printf("---------*遍历二叉树-------"); break;
+			printf("---------遍历二叉树-------\n");
+			{
+				printf("先序遍历二叉树\n");
+				preOrderTraverse(T);
+				printf("中序遍历二叉树\n");
+				inOrderTraverse(T);
+				printf("后序遍历二叉树\n");
+				postOrderTraverse(T);
+			}
+			break;
 		case 3:
-			printf("---------计算树的深度------"); break;
+			printf("---------计算树的深度------\n"); 
+			printf("该二叉树的深度为%d", depth(T));
+			break;
 		case 4:
-			printf("---------计算叶子结点个数-------"); break;
+			printf("---------计算叶子结点个数-------");
+			printf("该二叉树的叶子节点个数为%d", countLeaf(T));
+			break;
 		case 5:
-			printf("---------查找双亲-------"); break;
+			printf("---------查找双亲-------");
+			{
+				printf("请输入要查找双亲的结点的值\n");
+				char data;
+				scanf_s("%c", data);
+				findParent(T, data);
+			}
+			break;
 		case 6:
-			printf("---------查找兄弟-------"); break;
+			printf("---------查找兄弟-------");
+			{
+				printf("请输入要查找兄弟的结点的值");
+				char data;
+				scanf_s("%c", data);
+				findLSibling(T, data);
+				findRSibling(T, data);
+			}
+			break;
 		case 7:
 			printf("---------Huffman编码-------"); break;
 		case 8:break;

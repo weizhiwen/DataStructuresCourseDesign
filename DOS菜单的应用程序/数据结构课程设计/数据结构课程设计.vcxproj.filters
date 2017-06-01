@@ -57,6 +57,12 @@
     <ClInclude Include="Stack.h">
       <Filter>头文件\Stack</Filter>
     </ClInclude>
+    <ClInclude Include="通讯录.h">
+      <Filter>头文件\LinkList</Filter>
+    </ClInclude>
+    <ClInclude Include="表达式求解.h">
+      <Filter>头文件\Stack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

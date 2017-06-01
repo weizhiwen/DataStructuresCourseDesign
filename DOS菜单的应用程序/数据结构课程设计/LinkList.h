@@ -8,12 +8,12 @@
 //定义带头节点的单链表结构体
 typedef struct LISTNODE
 {
-	int data;
-	struct LISTNODE *next;
+	int data; //结点的数据值
+	struct LISTNODE *next; //结点的尾指针
 }LISTNODE, *PLIST;
 
 //创建单链表
-void createList(PLIST L, int num)
+PLIST createList(PLIST L, int num)
 {
 	L = (LISTNODE*)malloc(sizeof(LISTNODE));
 	if (!L)
@@ -34,10 +34,11 @@ void createList(PLIST L, int num)
 			p->next = NULL;
 		}
 	}
+	return L;
 }
 
 //单链表任意合法位置插入结点
-void insertNode(LISTNODE *L, int i, int data)
+void insertNode(PLIST L, int i, int data)
 {
 	PLIST p = L;
 	int j = 0;
@@ -54,11 +55,18 @@ void insertNode(LISTNODE *L, int i, int data)
 		s->data = data;//赋值
 		s->next = p->next;//插入
 		p->next = s;//挂上
+		printf("插入成功！\n", i);
 	}
 }
 
+//插入的重载函数，在原链表的尾部插入
+void insertNode(PLIST L, int data)
+{
+
+}
+
 //单链表任意合法位置删除结点，将结点的数据值返回给data变量
-void deleteNode(LISTNODE *L, int i, int &data)
+void deleteNode(PLIST L, int i, int &data)
 {
 	PLIST p = L;
 	int j = 0;
@@ -76,11 +84,12 @@ void deleteNode(LISTNODE *L, int i, int &data)
 		p->next = q->next;
 		data = q->data;
 		free(q);//释放q指向及结点的内存
+		printf("删除成功！");
 	}
 }
 
 //单链表根据位置查找结点的数据值，返回给data变量
-void selectNode(LISTNODE *L, int i, int &data)
+void selectNode(PLIST L, int i, int &data)
 {
 	PLIST p = L->next;//查找时跳过链表的头结点
 	int j = 1;
@@ -96,7 +105,7 @@ void selectNode(LISTNODE *L, int i, int &data)
 }
 
 //打印单链表的结点
-void printListNode(LISTNODE *L)
+void printListNode(PLIST L)
 {
 	PLIST p = L->next;
 	int i = 1;//计数变量
