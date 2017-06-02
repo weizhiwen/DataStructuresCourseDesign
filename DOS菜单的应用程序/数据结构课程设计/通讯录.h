@@ -24,10 +24,10 @@ PLISTTELLPEOPLE createTellBook(PLISTTELLPEOPLE T, int num)
 		printf("通讯录创建失败\a\n");
 	else{
 		TELLPEOPLE title;
-		title.userName = "联系人姓名";
-		title.tellNumber = "联系人电话";
+		title.userName = "name";
+		title.tellNumber = "tellphone";
 		T->data = title;
-		//T->next = NULL;
+		T->next = NULL;
 		printf("请输入初始化链表的%d个节点的值\n", num);
 		PLISTTELLPEOPLE p = T;
 		PLISTTELLPEOPLE q = NULL;//中间结点

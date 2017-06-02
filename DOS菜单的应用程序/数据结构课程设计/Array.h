@@ -44,6 +44,7 @@ void createTSMATRIX(TSMATRIX &matrix)
 //打印稀疏矩阵
 void printTSMatrix(TSMATRIX matrix)
 {
+	printf("行号 列号 值\n");
 	for (int i = 1; i <= matrix.nonZeroNumber; i++)
 	{
 		printf("%d\t%d\t%d\n", matrix.data[i].x, matrix.data[i].y, matrix.data[i].value);
@@ -51,23 +52,21 @@ void printTSMatrix(TSMATRIX matrix)
 }
 
 //判断具体位置的元素是否为0，如果不为0，返回其数据值
-bool isNonZeroElem(TSMATRIX matrix, int row, int col, int &data)
+int isNonZeroElem(TSMATRIX matrix, int row, int col)
 {
 	int nonZeroNumber = matrix.nonZeroNumber;
-	for (int i = 1; i <= nonZeroNumber; i++)
+	for (int i = 1; i <= nonZeroNumber && matrix.data[i].x <= i; i++)
 	{
 		if (matrix.data[i].x == row && matrix.data[i].y == col)
 		{
-			data = matrix.data[i].value;
-
-			return true;
+			return matrix.data[i].value;
 		}
 	}
-	return false;
+	return 0;
 }
 
-//稀疏矩阵的乘法运算
-void multiplyTSMatrix(TSMATRIX matrixA, TSMATRIX matrixB, TSMATRIX &matrixC)
+//稀疏矩阵的低效乘法运算
+void multiplyTSMatrix(TSMATRIX matrixA, TSMATRIX matrixB, TSMATRIX &matrixC) 
 {
 	//判断矩阵A的列数是否等于B的行数
 	if (matrixA.cols != matrixB.rows)
@@ -94,9 +93,8 @@ void multiplyTSMatrix(TSMATRIX matrixA, TSMATRIX matrixB, TSMATRIX &matrixC)
 					int temp = 0; //储存乘积的值每次都清零
 					for (int k = 1; k <= colsA; k++)
 					{
-						//核心计算，暂时有问题
-						if (isNonZeroElem(matrixA, i, k, a) && isNonZeroElem(matrixB, k, j, b))
-							temp += a * b;
+						//核心计算,问题已解决
+						temp += isNonZeroElem(matrixA, i, k) * isNonZeroElem(matrixB, k, j);
 					}
 					//判断计算的结果是否为零，不为零则压缩到矩阵C中
 					if (temp != 0)

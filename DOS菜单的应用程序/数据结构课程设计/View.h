@@ -182,8 +182,10 @@ void Array(){
 				TSMATRIX matrixA, matrixB, matrixC;
 				printf("请输入矩阵A\n");
 				createTSMATRIX(matrixA);
+				printTSMatrix(matrixA);
 				printf("请输入矩阵B\n");
 				createTSMATRIX(matrixB);
+				printTSMatrix(matrixB);
 				multiplyTSMatrix(matrixA, matrixB, matrixC);
 				printf("计算出结果矩阵C为\n");
 				printTSMatrix(matrixC);
