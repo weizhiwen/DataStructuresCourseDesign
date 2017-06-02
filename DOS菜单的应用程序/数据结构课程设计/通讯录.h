@@ -12,20 +12,35 @@ typedef struct TELLPEOPLE
 //定义通讯录单链表结构体
 typedef struct LISTTELLPEOPLE
 {
-	TELLPEOPLE data;
+	TELLPEOPLE data; //联系人的信息
 	struct LISTTELLPEOPLE *next;
 }LISTTELLPEOPLE, *PLISTTELLPEOPLE;
 
 //创建一个空的通讯录
-PLISTTELLPEOPLE createTellBook(PLISTTELLPEOPLE T)
+PLISTTELLPEOPLE createTellBook(PLISTTELLPEOPLE T, int num)
 {
 	T = (LISTTELLPEOPLE*)malloc(sizeof(LISTTELLPEOPLE));
 	if (!T)
 		printf("通讯录创建失败\a\n");
 	else{
-		TELLPEOPLE title = { "姓名", "电话" };
+		TELLPEOPLE title;
+		title.userName = "联系人姓名";
+		title.tellNumber = "联系人电话";
 		T->data = title;
-		T->next = NULL;
+		//T->next = NULL;
+		printf("请输入初始化链表的%d个节点的值\n", num);
+		PLISTTELLPEOPLE p = T;
+		PLISTTELLPEOPLE q = NULL;//中间结点
+		for (int i = 0; i < num; i++)
+		{
+			q = (LISTTELLPEOPLE*)malloc(sizeof(LISTTELLPEOPLE));
+			printf("请输入该联系人的姓名和电话信息\n");
+			scanf_s("%s%s", &q->data.userName, &q->data.tellNumber);
+			//正向插入
+			p->next = q;//中间结点挂到链表上
+			p = q;//p的位置移动到最后一个节点上
+			p->next = NULL;
+		}
 	}
 	return T;
 }
@@ -180,7 +195,10 @@ void showTellBook()
 {
 	//创建一个空的电话本
 	PLISTTELLPEOPLE T = NULL;
-	T = createTellBook(T);
+	int num = 0;
+	printf("请输入初始话电话本的联系人数量");
+	scanf_s("%d", &num);
+	T = createTellBook(T,num);
 	int n;
 	do{
 		printf("\n");

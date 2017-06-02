@@ -5,6 +5,8 @@
 #include "Stack.h"
 #include "Array.h"
 #include "Binarytree.h"
+#include "Graph.h"
+#include "图的遍历.h"
 
 //主程序界面函数
 
@@ -245,7 +247,7 @@ void BiTree(){
 			{
 				printf("请输入要查找双亲的结点的值\n");
 				char data;
-				scanf_s("%c", data);
+				scanf_s("%c", &data);
 				findParent(T, data);
 			}
 			break;
@@ -254,7 +256,7 @@ void BiTree(){
 			{
 				printf("请输入要查找兄弟的结点的值");
 				char data;
-				scanf_s("%c", data);
+				scanf_s("%c", &data);
 				findLSibling(T, data);
 				findRSibling(T, data);
 			}
@@ -273,6 +275,8 @@ void BiTree(){
 //图菜单
 void Graph(){
 	int n;
+	//图相关变量
+	MGRAPH mGraph;
 	do{
 		printf("\n");
 		printf("****************图的基本操作及应用*****************\n");
@@ -291,23 +295,55 @@ void Graph(){
 		scanf_s("%d", &n);
 		switch (n){
 		case 1:
-			printf("---------创建无向图-------"); break;
+			printf("---------创建无向图-------\n");
+			{
+				
+				createUDG(mGraph);
+				printf("打印无向图\n");
+				printGraph(mGraph);
+			}
+			break;
 		case 2:
-			printf("---------创建无向网-------"); break;
+			printf("---------创建无向网-------\n");
+			{
+				MGRAPH mGraph;
+				createUDN(mGraph);
+				printf("打印无向网\n");
+				printGraph(mGraph);
+			}
+			break;
 		case 3:
-			printf("---------创建有向图-------"); break;
+			printf("---------创建有向图-------\n");
+			{
+				MGRAPH mGraph;
+				createDG(mGraph);
+				printf("打印有向图\n");
+				printGraph(mGraph);
+			}
+			break;
 		case 4:
-			printf("---------创建有向网-------"); break;
+			printf("---------创建有向网-------\n");
+			{
+				MGRAPH mGraph;
+				createDN(mGraph);
+				printf("打印有向网\n");
+				printGraph(mGraph);
+			}
+			break;
 		case 5:
-			printf("---------遍历-------"); break;
+			printf("---------遍历-------\n");
+			{
+				DFSTraverse(mGraph);
+			}
+			break;
 		case 6:
-			printf("---------拓扑排序-------"); break;
+			printf("---------拓扑排序-------\n"); break;
 		case 7:
-			printf("---------最小生成树-------"); break;
+			printf("---------最小生成树-------\n"); break;
 		case 8:
-			printf("---------最短路径-------"); break;
+			printf("---------最短路径-------\n"); break;
 		case 9:
-			printf("---------关键路径-------"); break;
+			printf("---------关键路径-------\n"); break;
 		case 10:break;
 		default:
 			printf("ERROR!"); break;

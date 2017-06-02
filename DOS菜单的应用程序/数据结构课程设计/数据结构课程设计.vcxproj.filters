@@ -63,6 +63,12 @@
     <ClInclude Include="表达式求解.h">
       <Filter>头文件\Stack</Filter>
     </ClInclude>
+    <ClInclude Include="Huffman编码.h">
+      <Filter>头文件\BinaryTree</Filter>
+    </ClInclude>
+    <ClInclude Include="图的遍历.h">
+      <Filter>头文件\Graph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
