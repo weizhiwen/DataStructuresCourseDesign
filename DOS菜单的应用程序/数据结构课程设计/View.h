@@ -3,6 +3,7 @@
 #include "LinkList.h"
 #include "通讯录.h"
 #include "Stack.h"
+#include "表达式求解.h"
 #include "Array.h"
 #include "Binarytree.h"
 #include "Graph.h"
@@ -142,7 +143,9 @@ void Stack(){
 			break;
 		case 4:
 			printf("--------表达式求值-------\n");
-			printf("功能未实现\n");
+			{
+				solution();
+			}
 			break;
 		case 5:break;
 		default:
