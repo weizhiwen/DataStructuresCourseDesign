@@ -71,6 +71,18 @@ void addTellPeople(PLISTTELLPEOPLE L, int i, TELLPEOPLE data)
 		printf("插入成功！\n");
 	}
 }
+//添加联系人，尾插法
+void addTellPeople(PLISTTELLPEOPLE L, TELLPEOPLE data)
+{
+	PLISTTELLPEOPLE p = L;
+	while (p->next)
+		p = p->next; //遍历找到尾结点
+	PLISTTELLPEOPLE s = (LISTTELLPEOPLE *)malloc(sizeof(LISTTELLPEOPLE));
+	s->data = data;//赋值
+	s->next = NULL;
+	p->next = s;//挂上
+	printf("插入成功！\n");
+}
 
 //根据查找联系人，可根据姓名，电话号码两种种方式查询
 void selectTellPeopleByName(PLISTTELLPEOPLE L)
@@ -232,10 +244,24 @@ void showTellBook()
 				scanf_s("%s", &tellPeople.userName, 20);
 				printf("请输入新联系人的电话号码\n");
 				scanf_s("%s", &tellPeople.tellNumber, 15);
-				printf("请选择插入位置：");
+				printf("请选择添加方式\n1，任意位置添加\n2，电话本尾部添加\n");
+				int flag = 0;
+				scanf_s("%d", &flag);
 				int i = 0;
-				scanf_s("%d", &i);
-				addTellPeople(T, i, tellPeople);
+				switch (flag)
+				{
+				case 1:
+					printf("请选择插入位置：");
+					scanf_s("%d", &i);
+					addTellPeople(T, i, tellPeople);
+					break;
+				case 2:
+					addTellPeople(T, tellPeople);
+					break;
+				default:
+					printf("不合理的输入\a\n");
+					break;
+				}
 			}
 			break;
 		case 2:

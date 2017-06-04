@@ -55,14 +55,21 @@ void insertNode(PLIST L, int i, int data)
 		s->data = data;//赋值
 		s->next = p->next;//插入
 		p->next = s;//挂上
-		printf("插入成功！\n", i);
+		printf("插入成功！\n");
 	}
 }
 
 //插入的重载函数，在原链表的尾部插入
 void insertNode(PLIST L, int data)
 {
-
+	PLIST p = L;
+	while (p->next)
+		p = p->next;//遍历找到尾结点
+	PLIST s = (LISTNODE *)malloc(sizeof(LISTNODE));
+	s->data = data;//赋值
+	s->next = NULL;
+	p->next = s; //挂上
+	printf("插入成功！\n");
 }
 
 //单链表任意合法位置删除结点，将结点的数据值返回给data变量

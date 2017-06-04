@@ -55,11 +55,26 @@ void LinkList(){
 		case 2:
 			printf("--------插入元素-------\n");
 			{
-				int i , data;
-				i = data = 0;
-				printf("请输入要插入的位置和插入的数据\n");
-				scanf_s("%d%d", &i, &data);
-				insertNode(L, i, data);
+				int flag , i, data;
+				flag = data = 0;
+				printf("请选择插入方式，支持\n1,随机插入\n2,尾部插入\n");
+				scanf_s("%d", &flag);
+				switch (flag)
+				{
+				case 1:
+					printf("请输入要插入的位置和插入的数据\n");
+					scanf_s("%d%d", &i, &data);
+					insertNode(L, i, data);
+					break;
+				case 2:
+					printf("请输入要尾部插入的数据\n");
+					scanf_s("%d", &data);
+					insertNode(L, data);
+					break;
+				default:
+					printf("不合理输入\a\n");
+					break;
+				}
 			}
 			break;
 		case 3:
@@ -224,6 +239,7 @@ void BiTree(){
 		case 1:
 			printf("---------创建二叉树--------\n");
 			{
+				fflush(stdin);
 				printf("先根创建二叉树\n");
 				createBiTree(T);
 			}
@@ -241,14 +257,14 @@ void BiTree(){
 			break;
 		case 3:
 			printf("---------计算树的深度------\n"); 
-			printf("该二叉树的深度为%d", depth(T));
+			printf("该二叉树的深度为%d\n", depth(T));
 			break;
 		case 4:
-			printf("---------计算叶子结点个数-------");
-			printf("该二叉树的叶子节点个数为%d", countLeaf(T));
+			printf("---------计算叶子结点个数-------\n");
+			printf("该二叉树的叶子节点个数为%d\n", countLeaf(T));
 			break;
 		case 5:
-			printf("---------查找双亲-------");
+			printf("---------查找双亲-------\n");
 			{
 				printf("请输入要查找双亲的结点的值\n");
 				char data;
@@ -259,7 +275,7 @@ void BiTree(){
 		case 6:
 			printf("---------查找兄弟-------");
 			{
-				printf("请输入要查找兄弟的结点的值");
+				printf("请输入要查找兄弟的结点的值：");
 				char data;
 				scanf_s("%c", &data);
 				findLSibling(T, data);
@@ -267,8 +283,8 @@ void BiTree(){
 			}
 			break;
 		case 7:
-			printf("---------Huffman编码-------");
-			printf("功能未实现");
+			printf("---------Huffman编码-------\n");
+			printf("功能未实现\n");
 			break;
 		case 8:break;
 		default:
@@ -338,7 +354,11 @@ void Graph(){
 		case 5:
 			printf("---------遍历-------\n");
 			{
+				printf("深度遍历\n");
 				DFSTraverse(mGraph);
+				printf("\n");
+				printf("广度遍历\n");
+				BFSTraverse(mGraph);
 			}
 			break;
 		case 6:

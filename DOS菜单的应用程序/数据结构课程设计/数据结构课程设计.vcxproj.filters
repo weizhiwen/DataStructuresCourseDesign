@@ -28,6 +28,9 @@
     <Filter Include="头文件\Graph">
       <UniqueIdentifier>{aab1b9b7-f820-4d1d-843c-5911c67bb537}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Queue">
+      <UniqueIdentifier>{d281e568-b721-485b-b943-db65b71c9da5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -68,6 +71,9 @@
     </ClInclude>
     <ClInclude Include="图的遍历.h">
       <Filter>头文件\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>头文件\Queue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

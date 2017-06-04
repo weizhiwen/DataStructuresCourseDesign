@@ -45,6 +45,7 @@ void createUDG(MGRAPH &mGraph)
 	{
 		scanf_s("%c", &mGraph.vers[i]);
 	}
+	fflush(stdin); //清空缓存区，不影响后续的输入
 	//构建邻接矩阵
 	for (int i = 0; i < mGraph.vexnum; i++)
 	{

@@ -129,7 +129,8 @@ const char *getOpnd(const char *c, int *op)
 {
 	//获得以*c开始的操作数，返回后c为操作符  
 	int sum = 0, tmp;
-	while (false == isOperator(*c)){//当c不是操作符  
+	while (false == isOperator(*c))
+	{//当c不是操作符  
 		tmp = *c - '0';
 		sum = sum * 10 + tmp;
 		//printf("tmp=%d\n",tmp);  
@@ -140,86 +141,131 @@ const char *getOpnd(const char *c, int *op)
 	return c;
 }
 
-//判断op1和op2优先级的高低
-char Precede(char op1, char op2)
+//优先级表
+/*    +  -  *  /  (  )  #
+*  +  >  >  <  <  <  >  >
+*  -  >  >  <  <  <  >  >
+*  *  >  >  >  >  <  >  >
+*  /  >  >  >  >  <  >  >
+*  (  <  <  <  <  <  =  0
+*  )  >  >  >  >  0  >  >
+*  #  <  <  <  <  <  0  =
+*/
+char op[7][7] = 
 {
+	{'>', '>', '<', '<', '<', '>', '>'},
+	{'>', '>', '<', '<', '<', '>', '>'},
+	{'>', '>', '>', '>', '<', '>', '>'},
+	{'>', '>', '>', '>', '<', '>', '>'},
+	{'<', '<', '<', '<', '<', '=', ' '},
+	{'>', '>', '>', '>', ' ', '>', '>'},
+	{'<', '<', '<', '<', '<', ' ', '='}
+};
+//个人觉得比较好的优先级比较方法
+char precede(char op1, char op2)
+{
+	int i, j; //用来记录优先级坐标点位置
 	switch (op1){
-	case '+':
-		switch (op2){
-		case '*':
-		case '/':
-		case '(':
-			return '<';
-			break;
-		default:
-			return '>';
-			break;
-		}
-		break;
-	case '-':
-		switch (op2){
-		case '*':
-		case '/':
-		case '(':
-			return '<';
-			break;
-		default:
-			return '>';
-			break;
-		}
-		break;
-	case '*':
-		switch (op2){
-		case '(':
-			return '<';
-			break;
-		default:
-			return '>';
-			break;
-		}
-		break;
-	case '/':
-		switch (op2){
-		case '(':
-			return '<';
-			break;
-		default:
-			return '>';
-			break;
-		}
-		break;
-	case '(':
-		switch (op2){
-		case ')':
-			return '=';
-			break;
-		default:
-			return '<';
-			break;
-		}
-		break;
-	case ')':
-		switch (op2){
-		default:
-			return '>';
-			break;
-		}
-		break;
-	case '#':
-		switch (op2){
-		case '#':
-			return '=';
-			break;
-		default:
-			return '<';
-			break;
-		}
-		break;
-	default:
-		return '<';
-		break;
+	case '+': i = 0; break;
+	case '-': i = 1; break;
+	case '*': i = 2; break;
+	case '/': i = 3; break;
+	case '(': i = 4; break;
+	case ')': i = 5; break;
+	case '#': i = 6; break;
 	}
+	switch (op2){
+	case '+': j = 0; break;
+	case '-': j = 1; break;
+	case '*': j = 2; break;
+	case '/': j = 3; break;
+	case '(': j = 4; break;
+	case ')': j = 5; break;
+	case '#': j = 6; break;
+	}
+	return op[i][j];
 }
+
+//判断op1和op2优先级的高低
+//char Precede(char op1, char op2)
+//{
+//	switch (op1){
+//	case '+':
+//		switch (op2){
+//		case '*':
+//		case '/':
+//		case '(':
+//			return '<';
+//			break;
+//		default:
+//			return '>';
+//			break;
+//		}
+//		break;
+//	case '-':
+//		switch (op2){
+//		case '*':
+//		case '/':
+//		case '(':
+//			return '<';
+//			break;
+//		default:
+//			return '>';
+//			break;
+//		}
+//		break;
+//	case '*':
+//		switch (op2){
+//		case '(':
+//			return '<';
+//			break;
+//		default:
+//			return '>';
+//			break;
+//		}
+//		break;
+//	case '/':
+//		switch (op2){
+//		case '(':
+//			return '<';
+//			break;
+//		default:
+//			return '>';
+//			break;
+//		}
+//		break;
+//	case '(':
+//		switch (op2){
+//		case ')':
+//			return '=';
+//			break;
+//		default:
+//			return '<';
+//			break;
+//		}
+//		break;
+//	case ')':
+//		switch (op2){
+//		default:
+//			return '>';
+//			break;
+//		}
+//		break;
+//	case '#':
+//		switch (op2){
+//		case '#':
+//			return '=';
+//			break;
+//		default:
+//			return '<';
+//			break;
+//		}
+//		break;
+//	default:
+//		return '<';
+//		break;
+//	}
+//}
 
 ////对操作数a，b进行theta运算 
 int operate(int a, char theta, int b)
@@ -285,12 +331,15 @@ int EvalueateExpression(const char *expression){
 		//printf("getchar=%c\n",*c);  
 		if (*c == '\0')//遇到回车退出  
 			break;
-		if (false == isOperator(*c)){
+		if (false == isOperator(*c))
+		{
 			c = getOpnd(c, &num);
 			pushOperand(&OPND, num);
 		}
 		else
-			switch (Precede(getOperatorTop(&OPTR), *c)){
+		{
+			switch (precede(getOperatorTop(&OPTR), *c))
+			{
 			case '<':
 				pushOperator(&OPTR, *c);
 				c++;
@@ -310,7 +359,8 @@ int EvalueateExpression(const char *expression){
 			default:
 				//printf("Precede:%c",Precede(GetTop_OPTR(OPTR),*c));  
 				break;
-		}//switch  
+			}//switch  
+		}
 	}//while  
 	result = getOperandTop(&OPND);
 	return result;
