@@ -75,6 +75,18 @@
     <ClInclude Include="Queue.h">
       <Filter>头文件\Queue</Filter>
     </ClInclude>
+    <ClInclude Include="拓扑排序.h">
+      <Filter>头文件\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="最小生成树.h">
+      <Filter>头文件\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="最短路径.h">
+      <Filter>头文件\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="关键路径.h">
+      <Filter>头文件\Graph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

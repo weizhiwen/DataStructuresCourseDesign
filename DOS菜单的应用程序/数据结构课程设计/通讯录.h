@@ -202,7 +202,7 @@ void changeTellPeopleByTelNumber(PLISTTELLPEOPLE L)
 	}
 }
 
-
+//打印整个电话本的联系人信息
 void printTellBook(PLISTTELLPEOPLE L)
 {
 	PLISTTELLPEOPLE p = L->next;

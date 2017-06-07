@@ -6,6 +6,7 @@
 #include "表达式求解.h"
 #include "Array.h"
 #include "Binarytree.h"
+#include "Huffman编码.h"
 #include "Graph.h"
 #include "图的遍历.h"
 
@@ -284,7 +285,9 @@ void BiTree(){
 			break;
 		case 7:
 			printf("---------Huffman编码-------\n");
-			printf("功能未实现\n");
+			{
+				huffmanCode();
+			}
 			break;
 		case 8:break;
 		default:

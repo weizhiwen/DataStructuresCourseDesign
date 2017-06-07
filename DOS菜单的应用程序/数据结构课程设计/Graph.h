@@ -226,5 +226,3 @@ void printGraph(MGRAPH mGraph)
 		printf("\n");
 	}
 }
-
-//Í¼µÄ±éÀú

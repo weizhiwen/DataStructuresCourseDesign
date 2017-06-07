@@ -89,7 +89,11 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="View.h" />
+    <ClInclude Include="关键路径.h" />
     <ClInclude Include="图的遍历.h" />
+    <ClInclude Include="拓扑排序.h" />
+    <ClInclude Include="最小生成树.h" />
+    <ClInclude Include="最短路径.h" />
     <ClInclude Include="表达式求解.h" />
     <ClInclude Include="通讯录.h" />
   </ItemGroup>
